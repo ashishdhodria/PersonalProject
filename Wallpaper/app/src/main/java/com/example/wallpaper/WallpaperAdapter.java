@@ -39,8 +39,9 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Hit hit = hitList.get(position);
+     //   holder.textView.setText(hit.getTags());
         Picasso.with(context).load(hit.getLargeImageURL()).into(holder.imageView);
-        holder.textView.setText(hit.getTags());
+
     }
 
     @Override
@@ -50,14 +51,14 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
-        TextView textView;
+       // TextView textView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
            imageView = itemView.findViewById(R.id.image);
-           textView = itemView.findViewById(R.id.text);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageView.setClipToOutline(true);
             }
+         //  textView = itemView.findViewById(R.id.text);
         }
     }
 }

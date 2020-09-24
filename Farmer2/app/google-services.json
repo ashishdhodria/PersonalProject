@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "964721670794",
+    "firebase_url": "https://farmer-a75d1.firebaseio.com",
+    "project_id": "farmer-a75d1",
+    "storage_bucket": "farmer-a75d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964721670794:android:279c2d69723cbdeac44b73",
+        "android_client_info": {
+          "package_name": "com.example.farmer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964721670794-k3353p5up8n4mtblld3r3fjcnlv75jbi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnMQCbIFheEI55j2P2kQmJYvh_IWU8Ju0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964721670794-k3353p5up8n4mtblld3r3fjcnlv75jbi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
