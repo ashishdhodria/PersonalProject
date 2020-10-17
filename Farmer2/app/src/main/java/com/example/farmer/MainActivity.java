@@ -1,5 +1,6 @@
 package com.example.farmer;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,9 +8,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText editTextMobile;
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null) {
+            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

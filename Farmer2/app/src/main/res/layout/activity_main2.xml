@@ -18,11 +18,11 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Current Daily Price of Various Commodities from Various Markets (Mandi)
-" app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="Mandi"
+        android:text="Crop Type"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="cropType"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

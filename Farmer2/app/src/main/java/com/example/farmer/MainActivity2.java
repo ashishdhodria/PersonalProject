@@ -22,8 +22,8 @@ public class MainActivity2 extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Mandi(View view) {
-        Intent intent = new Intent(MainActivity2.this, MarketPrice.class);
+    public void cropType(View view) {
+        Intent intent = new Intent(MainActivity2.this,Crop_Varities.class);
         startActivity(intent);
     }
 }
