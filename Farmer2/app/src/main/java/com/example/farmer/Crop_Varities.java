@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.farmer.RecyclerView.CropListAdapter;
@@ -21,6 +22,7 @@ public class Crop_Varities extends AppCompatActivity {
 
     RecyclerView recyclerView;
     CropListAdapter cropListAdapter;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +30,29 @@ public class Crop_Varities extends AppCompatActivity {
         setContentView(R.layout.activity_crop__varities);
 
         recyclerView = findViewById(R.id.recycler);
+        searchView = findViewById(R.id.searchView);
+        getData("all");
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                getData(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //    adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+
+    private void getData(String value) {
         Call<Crop> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getCrops();
+                .getCrops(value);
 
         call.enqueue(new Callback<Crop>() {
             @Override
