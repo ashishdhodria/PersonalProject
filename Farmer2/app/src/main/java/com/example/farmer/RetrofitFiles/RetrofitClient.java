@@ -1,4 +1,4 @@
-package com.example.farmer;
+package com.example.farmer.RetrofitFiles;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

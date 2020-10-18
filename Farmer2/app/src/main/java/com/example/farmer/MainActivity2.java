@@ -26,4 +26,9 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = new Intent(MainActivity2.this,Crop_Varities.class);
         startActivity(intent);
     }
+
+    public void dailyPrice(View view) {
+        Intent intent = new Intent(MainActivity2.this,MarketPrice.class);
+        startActivity(intent);
+    }
 }

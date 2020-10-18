@@ -1,4 +1,4 @@
-package com.example.farmer;
+package com.example.farmer.RetrofitFiles;
 
 import com.example.farmer.example.Crop;
 
@@ -11,7 +11,6 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    //Api call for addstudent.php
     @GET("search?token=N3F4ZmY3RVR0UXFBQmdaZEdxWGViUT09")
     Call<Crop> getCrops(@Query("q") String value);
 }
