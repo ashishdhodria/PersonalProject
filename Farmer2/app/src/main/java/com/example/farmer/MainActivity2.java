@@ -31,4 +31,9 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = new Intent(MainActivity2.this,MarketPrice.class);
         startActivity(intent);
     }
+
+    public void setProfile(View view) {
+        Intent intent = new Intent(MainActivity2.this,Profile.class);
+        startActivity(intent);
+    }
 }
