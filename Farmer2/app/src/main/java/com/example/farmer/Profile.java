@@ -9,19 +9,29 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.farmer.data.Item;
+import com.example.farmer.data.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.UUID;
+
 public class Profile extends AppCompatActivity {
 
-    private EditText name, state, district, market;
+    private EditText name, state, district, market, commodity, price;
     private String uname=" ", ustate=" ", udistrict=" ", umarket=" ";
     FirebaseFirestore db;
     FirebaseUser user;
+
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +41,9 @@ public class Profile extends AppCompatActivity {
         state = findViewById(R.id.state);
         district = findViewById(R.id.district);
         market = findViewById(R.id.market);
+
+        commodity = findViewById(R.id.commodity);
+        price = findViewById(R.id.price);
 
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -69,5 +82,27 @@ public class Profile extends AppCompatActivity {
                 Toast.makeText(Profile.this, "Saved", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void addItem(View view) {
+        String ucommodity = commodity.getText().toString();
+        String uprice = price.getText().toString();
+        String uniqueID = UUID.randomUUID().toString();
+
+        Item item = new Item(ucommodity, uprice, uniqueID);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("data").child(user.getUid()).child(uniqueID).setValue(item).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                commodity.setText(" ");
+                price.setText(" ");
+                Toast.makeText(Profile.this, "Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void showItem(View view) {
+
     }
 }

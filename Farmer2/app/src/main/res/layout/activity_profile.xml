@@ -40,6 +40,26 @@
                 android:layout_height="wrap_content"
                 android:onClick="saveData"
                 android:text="Save"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/commodity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Commodity"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Price"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="addItem"
+                android:text="Add Item"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showItem"
+                android:text="Show Item"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
