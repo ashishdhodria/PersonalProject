@@ -12,13 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Profile"
+        <activity android:name=".Weather"
+            android:parentActivityName=".MainActivity2"
+            android:label="Weather"></activity>
+        <activity
+            android:name=".Profile"
             android:label="Profile"
-            android:parentActivityName=".MainActivity2"></activity>
+            android:parentActivityName=".MainActivity2" />
         <activity
             android:name=".Crop_Varities"
             android:label="Crop Varities"
-            android:parentActivityName=".MainActivity2"></activity>
+            android:parentActivityName=".MainActivity2" />
         <activity
             android:name=".MarketPrice"
             android:label="Daily Price"

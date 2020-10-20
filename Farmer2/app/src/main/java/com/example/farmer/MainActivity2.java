@@ -36,4 +36,9 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = new Intent(MainActivity2.this,Profile.class);
         startActivity(intent);
     }
+
+    public void gotoWeather(View view) {
+        Intent intent = new Intent(MainActivity2.this,Weather.class);
+        startActivity(intent);
+    }
 }
