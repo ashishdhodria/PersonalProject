@@ -37,8 +37,8 @@ public class MainActivity2 extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void gotoWeather(View view) {
-        Intent intent = new Intent(MainActivity2.this,Weather.class);
+    public void addItem(View view) {
+        Intent intent = new Intent(MainActivity2.this,AddItem.class);
         startActivity(intent);
     }
 }

@@ -43,8 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4"
-        android:onClick="gotoWeather"
-        android:text="Weather"/>
+        android:onClick="addItem"
+        android:text="Add Item"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button4"

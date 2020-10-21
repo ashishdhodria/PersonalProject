@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Weather"
+        <activity android:name=".AddItem"
             android:parentActivityName=".MainActivity2"
-            android:label="Weather"></activity>
+            android:label="Add Commodity"></activity>
+        <activity
+            android:name=".Weather"
+            android:label="Weather"
+            android:parentActivityName=".MainActivity2" />
         <activity
             android:name=".Profile"
             android:label="Profile"
