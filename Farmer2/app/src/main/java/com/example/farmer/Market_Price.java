@@ -2,12 +2,17 @@ package com.example.farmer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.farmer.RecyclerView.MarketListAdapter;
 import com.example.farmer.data.Item;
 import com.example.farmer.data.User;
+import com.example.farmer.listener.ItemClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -18,19 +23,31 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Market_Price extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private FirebaseFirestore db;
+    List<User> userList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private MarketListAdapter marketListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market__price);
 
+        recyclerView = findViewById(R.id.recycler);
         db = FirebaseFirestore.getInstance();
 
         mDatabase = FirebaseDatabase.getInstance().getReference("data");
 
+        getData();
+    }
+
+    private void getData() {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -42,8 +59,20 @@ public class Market_Price extends AppCompatActivity {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
                                     User user1 = task.getResult().toObject(User.class);
-                                    Toast.makeText(Market_Price.this, ""+user1.getName(), Toast.LENGTH_SHORT).show();
+                                    userList.add(user1);
                                 }
+
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(Market_Price.this));
+                                marketListAdapter = new MarketListAdapter(userList, Market_Price.this, new ItemClickListener() {
+                                    @Override
+                                    public void onItemClick(String id) {
+                                        Intent intent = new Intent(Market_Price.this, AllItems.class);
+                                        intent.putExtra("id", id);
+                                        startActivity(intent);
+                                    }
+                                });
+                                recyclerView.setAdapter(marketListAdapter);
                             }
                         }
                     });
@@ -55,6 +84,5 @@ public class Market_Price extends AppCompatActivity {
 
             }
         });
-
     }
 }
