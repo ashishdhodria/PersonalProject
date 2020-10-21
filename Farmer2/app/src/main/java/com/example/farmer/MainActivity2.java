@@ -43,5 +43,7 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     public void allData(View view) {
+        Intent intent = new Intent(MainActivity2.this,Market_Price.class);
+        startActivity(intent);
     }
 }
