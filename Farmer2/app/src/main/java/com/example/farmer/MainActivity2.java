@@ -41,4 +41,7 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = new Intent(MainActivity2.this,AddItem.class);
         startActivity(intent);
     }
+
+    public void allData(View view) {
+    }
 }
