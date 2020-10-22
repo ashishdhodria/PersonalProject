@@ -3,13 +3,13 @@ package com.example.farmer.RetrofitFiles;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClient1 {
+public class RetrofitClient2 {
     private static final String BASE_URL="http://api.openweathermap.org/data/2.5/";
-    private static RetrofitClient1 mInstance;
+    private static RetrofitClient2 mInstance;
     private Retrofit retrofit;
 
     //Define retrofit object
-    private RetrofitClient1()
+    private RetrofitClient2()
     {
         retrofit=new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -17,16 +17,16 @@ public class RetrofitClient1 {
                 .build();
     }
     //create synchronized singleton
-    public static synchronized RetrofitClient1 getInstance()
+    public static synchronized RetrofitClient2 getInstance()
     {
-        if(mInstance==null)
-           mInstance = new RetrofitClient1();
+        if (mInstance==null)
+            mInstance = new RetrofitClient2();
         return mInstance;
     }
     //Create method to get the api
-    public Api1 getApi1()
+    public Api2 getApi2()
     {
-        return retrofit.create(Api1.class);
+        return retrofit.create(Api2.class);
     }
 
 }
