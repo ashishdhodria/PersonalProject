@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.farmer.RecyclerView.CropListAdapter;
 import com.example.farmer.RetrofitFiles.RetrofitClient;
@@ -59,7 +60,7 @@ public class Crop_Varities extends AppCompatActivity {
             public void onResponse(Call<Crop> call, Response<Crop> response) {
                 Crop crop = response.body();
                 List<Datum> datumList = crop.getData();
-
+                Toast.makeText(Crop_Varities.this, ""+datumList.size(), Toast.LENGTH_SHORT).show();
                 CropListAdapter cropListAdapter = new CropListAdapter(datumList, Crop_Varities.this);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(Crop_Varities.this));

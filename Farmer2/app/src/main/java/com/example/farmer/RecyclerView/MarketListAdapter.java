@@ -1,14 +1,24 @@
 package com.example.farmer.RecyclerView;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Trace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.farmer.AddItem;
 import com.example.farmer.R;
 import com.example.farmer.data.User;
 import com.example.farmer.listener.ItemClickListener;
@@ -46,9 +56,30 @@ public class MarketListAdapter extends RecyclerView.Adapter<MarketListAdapter.My
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onItemClick(user.getUid());
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                alertDialog.setTitle("Select");
+                alertDialog.setMessage("choose the option");
+                alertDialog.setPositiveButton("Show", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        itemClickListener.onItemClick(user.getUid());
+                    }
+                }).setNegativeButton("Call", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:"+""+user.getPhone()));//change the number
+                        if (ActivityCompat.checkSelfPermission(context,
+                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        context.startActivity(callIntent);
+                    }
+                });
+                alertDialog.show();
             }
         });
+
     }
 
     @Override

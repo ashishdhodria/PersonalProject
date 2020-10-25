@@ -57,12 +57,11 @@
             android:weightSum="100">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_weight="50"
-                android:onClick="cropType"
-                android:text="Crop Type" />
+                android:onClick="allData"
+                android:text="MarketPrice" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button3"
@@ -79,12 +78,6 @@
             android:orientation="horizontal"
             android:weightSum="100">
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_weight="50"
-                android:onClick="allData"
-                android:text="MarketPrice" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button"
