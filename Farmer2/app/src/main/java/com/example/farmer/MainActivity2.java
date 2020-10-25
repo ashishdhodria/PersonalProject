@@ -14,11 +14,13 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer.RetrofitFiles.RetrofitClient2;
-import com.example.farmer.Weather.Weather;
+import com.example.farmer.exampleWeather.Main;
+import com.example.farmer.exampleWeather.Weather;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -29,27 +31,57 @@ import retrofit2.Response;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    TextView textView;
+    private TextView maxtv, mintv, raintv, humitv, windtv;
+    SearchView searchView;
+    String city = "kota";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        textView = findViewById(R.id.text);
-        getWeather();
+
+        maxtv = findViewById(R.id.maxtemp);
+        mintv = findViewById(R.id.mintemp);
+
+        raintv = findViewById(R.id.rain);
+        humitv = findViewById(R.id.humidity);
+        windtv = findViewById(R.id.wind);
+
+        searchView = findViewById(R.id.search);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                city = query;
+                getWeather(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        getWeather(city);
     }
 
-    private void getWeather() {
+    private void getWeather(String city) {
 
         Call<Weather> call = RetrofitClient2
                 .getInstance()
                 .getApi2()
-                .getWeather();
+                .getWeather(city);
 
         call.enqueue(new Callback<Weather>() {
             @Override
             public void onResponse(Call<Weather> call, Response<Weather> response) {
                 Weather weather = response.body();
-                Toast.makeText(MainActivity2.this, ""+weather.getName(), Toast.LENGTH_SHORT).show();
+                Main main = weather.getMain();
+                maxtv.setText((main.getTempMax() - 273)+"");
+                mintv.setText((main.getTempMin()-273)+"");
+                raintv.setText(weather.getWeather().get(0).getDescription());
+                humitv.setText(main.getHumidity()+"%");
+                windtv.setText(weather.getWind().getSpeed()+" Km/hr");
             }
 
             @Override

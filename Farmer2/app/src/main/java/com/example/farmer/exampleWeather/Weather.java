@@ -1,5 +1,5 @@
 
-package com.example.farmer.Weather;
+package com.example.farmer.exampleWeather;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
