@@ -36,15 +36,15 @@ public class DailyPriceAdapter extends RecyclerView.Adapter<DailyPriceAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Record record = recordList.get(position);
-        holder.state.setText("state : "+record.getState());
-        holder.district.setText("district : "+record.getDistrict());
-        holder.market.setText("market : "+record.getMarket());
-        holder.commodity.setText("commodity : "+record.getCommodity());
-        holder.variety.setText("variety : "+record.getVariety());
-        holder.arrival_date.setText("arrival_date : "+record.getArrivalDate());
-        holder.min_price.setText("min_price : "+record.getMinPrice());
-        holder.max_price.setText("max_price : "+record.getMaxPrice());
-        holder.modal_price.setText("modal_price : "+record.getModalPrice());
+        holder.state.setText("State : "+record.getState());
+        holder.district.setText("District : "+record.getDistrict());
+        holder.market.setText("Market : "+record.getMarket());
+        holder.commodity.setText("Commodity : "+record.getCommodity());
+        holder.variety.setText("Variety : "+record.getVariety());
+        holder.arrival_date.setText("Arrival_date : "+record.getArrivalDate());
+        holder.min_price.setText("Min_price : "+record.getMinPrice());
+        holder.max_price.setText("Max_price : "+record.getMaxPrice());
+        holder.modal_price.setText("Modal_price : "+record.getModalPrice());
     }
 
     @Override
