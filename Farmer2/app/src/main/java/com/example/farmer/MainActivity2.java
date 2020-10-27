@@ -12,6 +12,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.SearchView;
@@ -31,7 +33,7 @@ import retrofit2.Response;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    private TextView maxtv, mintv, raintv, humitv, windtv;
+    private TextView maxtv, ciyttv, raintv, humitv, windtv, country_tv;
     SearchView searchView;
     String city = "kota";
     @Override
@@ -40,7 +42,8 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         maxtv = findViewById(R.id.maxtemp);
-        mintv = findViewById(R.id.mintemp);
+        ciyttv = findViewById(R.id.city);
+        country_tv = findViewById(R.id.country);
 
         raintv = findViewById(R.id.rain);
         humitv = findViewById(R.id.humidity);
@@ -65,7 +68,29 @@ public class MainActivity2 extends AppCompatActivity {
         getWeather(city);
     }
 
-    private void getWeather(String city) {
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.signout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivity2.this,MainActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_activity2, menu);
+        return true;
+    }
+
+    private void getWeather(final String city) {
 
         Call<Weather> call = RetrofitClient2
                 .getInstance()
@@ -78,7 +103,8 @@ public class MainActivity2 extends AppCompatActivity {
                 Weather weather = response.body();
                 Main main = weather.getMain();
                 maxtv.setText((main.getTempMax() - 273)+"");
-                mintv.setText((main.getTempMin()-273)+"");
+                country_tv.setText(weather.getSys().getCountry());
+                ciyttv.setText(weather.getName());
                 raintv.setText(weather.getWeather().get(0).getDescription());
                 humitv.setText(main.getHumidity()+"%");
                 windtv.setText(weather.getWind().getSpeed()+" Km/hr");
