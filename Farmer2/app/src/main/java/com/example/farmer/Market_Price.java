@@ -2,10 +2,14 @@ package com.example.farmer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -66,10 +70,14 @@ public class Market_Price extends AppCompatActivity {
                                 recyclerView.setLayoutManager(new LinearLayoutManager(Market_Price.this));
                                 marketListAdapter = new MarketListAdapter(userList, Market_Price.this, new ItemClickListener() {
                                     @Override
-                                    public void onItemClick(String id) {
-                                        Intent intent = new Intent(Market_Price.this, AllItems.class);
-                                        intent.putExtra("id", id);
-                                        startActivity(intent);
+                                    public void onItemClick(String id1, String id2) {
+                                        if (id2=="1") {
+                                            Intent intent = new Intent(Market_Price.this, AllItems.class);
+                                            intent.putExtra("id", id1);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(Market_Price.this, "Calling", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 });
                                 recyclerView.setAdapter(marketListAdapter);

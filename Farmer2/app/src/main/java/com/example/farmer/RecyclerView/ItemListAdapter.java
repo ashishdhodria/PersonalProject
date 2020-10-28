@@ -44,7 +44,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.MyView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onItemClick(item.getUniqueID());
+                itemClickListener.onItemClick(item.getUniqueID(), item.getPrice());
             }
         });
     }

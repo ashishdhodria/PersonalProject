@@ -56,8 +56,8 @@ public class AllItems extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(AllItems.this));
                 itemListAdapter = new ItemListAdapter(itemList, AllItems.this, new ItemClickListener() {
                     @Override
-                    public void onItemClick(final String id) {
-                        Toast.makeText(AllItems.this, ""+id, Toast.LENGTH_SHORT).show();
+                    public void onItemClick(final String id1 , final String id2) {
+                        Toast.makeText(AllItems.this, ""+id1, Toast.LENGTH_SHORT).show();
                     }
                 });
                 recyclerView.setAdapter(itemListAdapter);

@@ -68,14 +68,14 @@ public class AddItem extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(AddItem.this));
                 itemListAdapter = new ItemListAdapter(itemList, AddItem.this, new ItemClickListener() {
                     @Override
-                    public void onItemClick(final String id) {
+                    public void onItemClick(final String id1, final String id2) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddItem.this);
                         alertDialog.setTitle("Remove");
                         alertDialog.setMessage("Do you want to remove Item?");
                         alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                getmDatabase.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                getmDatabase.child(id1).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Toast.makeText(AddItem.this, "Removed", Toast.LENGTH_SHORT).show();

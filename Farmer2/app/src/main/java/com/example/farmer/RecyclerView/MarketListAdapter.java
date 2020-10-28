@@ -62,18 +62,12 @@ public class MarketListAdapter extends RecyclerView.Adapter<MarketListAdapter.My
                 alertDialog.setPositiveButton("Show", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        itemClickListener.onItemClick(user.getUid());
+                        itemClickListener.onItemClick(user.getUid(), "1");
                     }
                 }).setNegativeButton("Call", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:"+""+user.getPhone()));//change the number
-                        if (ActivityCompat.checkSelfPermission(context,
-                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            return;
-                        }
-                        context.startActivity(callIntent);
+                        itemClickListener.onItemClick(user.getPhone(), "2");
                     }
                 });
                 alertDialog.show();
