@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,17 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.farmer.R;
 import com.example.farmer.dailyprice.Record;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class DailyPriceAdapter extends RecyclerView.Adapter<DailyPriceAdapter.MyViewHolder> {
+public class DailyPriceAdapter extends RecyclerView.Adapter<DailyPriceAdapter.MyViewHolder> implements Filterable {
 
     public DailyPriceAdapter(List<Record> recordList, Context context) {
         this.recordList = recordList;
         this.context = context;
+
+        recordListFull = new ArrayList<>(recordList);
     }
 
     List<Record> recordList;
+    List<Record> recordListFull;
     Context context;
+
 
     @NonNull
     @Override
@@ -51,6 +58,38 @@ public class DailyPriceAdapter extends RecyclerView.Adapter<DailyPriceAdapter.My
     public int getItemCount() {
         return recordList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<Record> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(recordListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Record item : recordListFull) {
+                    if (item.getState().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            recordList.clear();
+            recordList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView state, district, market, commodity, variety, arrival_date, min_price, max_price, modal_price;
